@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: scraper-msc
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://localhost:27017/ahorra_scraper}
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    properties:
+      spring.json.add.type.headers: false
+
+server:
+  port: ${SERVER_PORT:8084}
+
+scraper:
+  california:
+    cron: "${CALIFORNIA_SCRAPER_CRON:0 0 19 * * ?}"
+    base-url: "${CALIFORNIA_BASE_URL:https://www.californiasa.com.ar/productos}"
+    product-card-selector: ".csc-product-card"
+    title-selector: ".csc-product-title a"
+    image-selector: ".attachment-woocommerce_thumbnail"
+    product-link-selector: ".csc-product-image-link"
+    price-selector: ".csc-product-price .woocommerce-Price-amount"
+    next-page-selector: ".next"
+    request-delay: 250ms
+  hiperlibertad:
+    cron: "${HIPERLIBERTAD_SCRAPER_CRON:0 0 20 * * ?}"
+    product-card-selector: ".vtex-search-result-3-x-galleryItem"
+    title-selector: ".vtex-product-summary-2-x-productBrand"
+    product-link-selector: ".vtex-product-summary-2-x-clearLink"
+    image-selector: ".vtex-product-summary-2-x-imageNormal"
+    price-container-selector: ".vtex-product-price-1-x-sellingPriceValue"
+    price-span-selector: "span"
+    request-delay: 250ms
