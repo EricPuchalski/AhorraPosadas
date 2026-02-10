@@ -1,49 +1,6 @@
 spring:
   application:
     name: gateway-msc
-  cloud:
-    gateway:
-      mvc:
-        routes:
-          - id: auth-service
-            uri: ${AUTH_SERVICE_URL:http://localhost:8081}
-            predicates:
-              - Path=/api/auth/**
-          - id: product-service
-            uri: ${PRODUCT_SERVICE_URL:http://localhost:8082}
-            predicates:
-              - Path=/api/products/**
-          - id: favorite-service
-            uri: ${FAVORITE_SERVICE_URL:http://localhost:8083}
-            predicates:
-              - Path=/api/favorites/**
-          - id: scraper-service
-            uri: ${SCRAPER_SERVICE_URL:http://localhost:8084}
-            predicates:
-              - Path=/api/scraper/**
-          - id: notification-service
-            uri: ${NOTIFICATION_SERVICE_URL:http://localhost:8085}
-            predicates:
-              - Path=/api/notifications/**
-server:
-  port: ${SERVER_PORT:8080}
+  config:
+    import: "configserver:http://localhost:8888"
 
-gateway:
-  cors:
-    allowed-origins:
-      - http://localhost:3000
-    allowed-methods:
-      - GET
-      - POST
-      - PUT
-      - PATCH
-      - DELETE
-      - OPTIONS
-    allowed-headers:
-      - "*"
-    allow-credentials: true
-    max-age: 1h
-  rate-limit:
-    capacity: 100
-    refill-tokens: 100
-    refill-period: 1m
