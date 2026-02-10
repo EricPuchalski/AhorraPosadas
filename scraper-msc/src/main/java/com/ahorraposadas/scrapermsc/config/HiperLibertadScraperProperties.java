@@ -7,20 +7,21 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "scraper.hiperlibertad")
 public class HiperLibertadScraperProperties {
 
-    private Duration requestDelay = Duration.ofMillis(250);
-    private String productCardSelector = ".vtex-search-result-3-x-galleryItem";
-    private String titleSelector = ".vtex-product-summary-2-x-productBrand";
-    private String productLinkSelector = ".vtex-product-summary-2-x-clearLink";
-    private String imageSelector = ".vtex-product-summary-2-x-imageNormal";
-    private String priceContainerSelector = ".vtex-product-price-1-x-sellingPriceValue";
-    private String priceSpanSelector = "span";
+    private String cron;
+    private String productCardSelector;
+    private String titleSelector;
+    private String productLinkSelector;
+    private String imageSelector;
+    private String priceContainerSelector;
+    private String priceSpanSelector;
+    private Duration requestDelay;
 
-    public Duration getRequestDelay() {
-        return requestDelay;
+    public String getCron() {
+        return cron;
     }
 
-    public void setRequestDelay(Duration requestDelay) {
-        this.requestDelay = requestDelay;
+    public void setCron(String cron) {
+        this.cron = cron;
     }
 
     public String getProductCardSelector() {
@@ -69,5 +70,13 @@ public class HiperLibertadScraperProperties {
 
     public void setPriceSpanSelector(String priceSpanSelector) {
         this.priceSpanSelector = priceSpanSelector;
+    }
+
+    public Duration getRequestDelay() {
+        return requestDelay;
+    }
+
+    public void setRequestDelay(Duration requestDelay) {
+        this.requestDelay = requestDelay;
     }
 }

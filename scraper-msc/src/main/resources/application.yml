@@ -1,16 +1,15 @@
 spring:
   application:
     name: scraper-msc
-  data:
-    mongodb:
-      uri: ${MONGODB_URI:mongodb://localhost:27017/ahorra_scraper}
   kafka:
-    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
     properties:
       spring.json.add.type.headers: false
+  mongodb:
+    uri: ${MONGODB_URI:mongodb://root:root@localhost:27017/?authSource=admin}
 
 server:
   port: ${SERVER_PORT:8084}

@@ -42,7 +42,7 @@ public class HiperLibertadScraperService implements ScraperService {
     }
 
     @Override
-    @Scheduled(cron = "${scraper.hiperlibertad.cron:0 0 20 * * ?}")
+//    @Scheduled(cron = "${scraper.hiperlibertad.cron}")
     public void scrapeProducts() {
         Set<String> foundProductUrls = new HashSet<>();
         List<String> categories = HiperLibertadUtils.getAllCategoryUrls();

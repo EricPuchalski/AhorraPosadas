@@ -41,7 +41,7 @@ public class CaliforniaScraperService implements ScraperService {
     }
 
     @Override
-    @Scheduled(cron = "${scraper.california.cron:0 0 19 * * ?}")
+//    @Scheduled(cron = "${scraper.california.cron}")
     public void scrapeProducts() {
         Set<String> foundProductUrls = new HashSet<>();
         int pageNumber = 1;

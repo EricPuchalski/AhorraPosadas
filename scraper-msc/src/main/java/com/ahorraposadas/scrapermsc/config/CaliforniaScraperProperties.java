@@ -7,14 +7,23 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "scraper.california")
 public class CaliforniaScraperProperties {
 
-    private String baseUrl = "https://www.californiasa.com.ar/productos";
-    private String productCardSelector = ".csc-product-card";
-    private String titleSelector = ".csc-product-title a";
-    private String imageSelector = ".attachment-woocommerce_thumbnail";
-    private String productLinkSelector = ".csc-product-image-link";
-    private String priceSelector = ".csc-product-price .woocommerce-Price-amount";
-    private String nextPageSelector = ".next";
-    private Duration requestDelay = Duration.ofMillis(250);
+    private String cron;
+    private String baseUrl;
+    private String productCardSelector;
+    private String titleSelector;
+    private String imageSelector;
+    private String productLinkSelector;
+    private String priceSelector;
+    private String nextPageSelector;
+    private Duration requestDelay;
+
+    public String getCron() {
+        return cron;
+    }
+
+    public void setCron(String cron) {
+        this.cron = cron;
+    }
 
     public String getBaseUrl() {
         return baseUrl;
