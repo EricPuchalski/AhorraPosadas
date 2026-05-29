@@ -34,3 +34,5 @@ scraper:
     price-container-selector: ".vtex-product-price-1-x-sellingPriceValue"
     price-span-selector: "span"
     request-delay: 250ms
+  event:
+    topic: ${PRICE_DROP_EVENT}

@@ -1,7 +1,7 @@
 package com.ahorraposadas.scrapermsc.controller;
 
-import com.ahorraposadas.scrapermsc.service.CaliforniaScraperService;
-import com.ahorraposadas.scrapermsc.service.HiperLibertadScraperService;
+import com.ahorraposadas.scrapermsc.service.impl.CaliforniaScraperService;
+import com.ahorraposadas.scrapermsc.service.impl.HiperLibertadScraperService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

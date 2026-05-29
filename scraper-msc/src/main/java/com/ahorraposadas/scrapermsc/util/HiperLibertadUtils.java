@@ -1,4 +1,4 @@
-package com.ahorraposadas.scrapermsc.service;
+package com.ahorraposadas.scrapermsc.util;
 
 import java.util.ArrayList;
 import java.util.List;

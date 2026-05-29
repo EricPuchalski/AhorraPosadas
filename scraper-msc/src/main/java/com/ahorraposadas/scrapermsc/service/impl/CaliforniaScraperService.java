@@ -1,4 +1,4 @@
-package com.ahorraposadas.scrapermsc.service;
+package com.ahorraposadas.scrapermsc.service.impl;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -12,21 +12,23 @@ import com.ahorraposadas.scrapermsc.event.PriceChangeEvent;
 import com.ahorraposadas.scrapermsc.model.PriceEntry;
 import com.ahorraposadas.scrapermsc.model.Product;
 import com.ahorraposadas.scrapermsc.repository.ProductRepository;
+import com.ahorraposadas.scrapermsc.service.ScraperService;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CaliforniaScraperService implements ScraperService {
 
     private static final Logger logger = LoggerFactory.getLogger(CaliforniaScraperService.class);
-    private static final String PRICE_TOPIC = "price-changes";
+    @Value("${scraper.event.topic}")
+    private String PRICE_TOPIC;
 
     private final ProductRepository productRepository;
     private final KafkaTemplate<String, PriceChangeEvent> kafkaTemplate;
@@ -121,12 +123,16 @@ public class CaliforniaScraperService implements ScraperService {
         boolean priceChanged = product.getCurrentPrice() != null && price.compareTo(product.getCurrentPrice()) != 0;
         BigDecimal previousPrice = product.getCurrentPrice();
 
+
         product.setName(title);
         product.setImageUrl(imageUrl);
-        product.setCurrentPrice(price);
         product.setActive(true);
         product.setLastCheckedAt(Instant.now());
-        product.addPriceEntry(new PriceEntry(price, product.getLastCheckedAt()));
+
+        if (priceChanged){
+            product.addPriceEntry(new PriceEntry(price, product.getLastCheckedAt()));
+            product.setCurrentPrice(price);
+        }
 
         productRepository.save(product);
 
